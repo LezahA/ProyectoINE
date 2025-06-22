@@ -1,0 +1,32 @@
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Montserrat', Arial, sans-serif; 
+
+}
+
+.main-content {
+  flex: 1 0 auto;
+  border: 1px solid #ddd;
+  padding: 20px;
+  position: relative; 
+  z-index: 1;
+}
+
+#video-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
