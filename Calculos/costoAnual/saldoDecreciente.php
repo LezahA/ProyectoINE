@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../../estilos.css">
+    <link rel="stylesheet" type="text/css" href="../../estilosTablas.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
 
   </head>
@@ -15,11 +15,11 @@
     <!-- Cabecera y barra de navegacion -->
     <?php include '../../estructura/cabecera.php'; ?>
     <?php include '../../estructura/navbarSubniveles.php'; ?>
-    <div class="main-content container-fluid">
+    <div class="main-content container py-5">
         <!-- Formulario para capturar variables iniciales B,N y VR -->
         <?php
         echo "
-        <h1 class='mb-4 text-success'>Saldo Decreciente</h1>
+        <h1 class='mb-4 text-white'>Saldo Decreciente</h1>
         <form action='' method='post' class='p-4 rounded shadow bg-light' style='max-width: 400px;'>
             <div class='mb-3'>
             <label for='B' class='form-label'>Costo base</label>

@@ -11,12 +11,6 @@
         <li class="nav-item">
         <a class="nav-link" href="../../Calculos/costoAnual.php">Costo anual</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link" href="../../Calculos/tasaRendimiento.php">Tasa de rendimiento</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="../../Calculos/valorPresente.php">Valor presente</a>
-        </li>
     </ul>
     </div>
 </div>
