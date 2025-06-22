@@ -29,7 +29,7 @@
         box-shadow: 0 12px 36px rgba(0,0,0,0.40);
       }
       .display-5 {
-        color:rgb(157, 196, 245);       
+        color:#c4a371;       
         letter-spacing: 1px;
       }
       .lead {

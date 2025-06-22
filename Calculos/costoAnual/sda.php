@@ -19,7 +19,7 @@
     <!-- Formulario para capturar variables iniciales B, VR y N -->
     <?php
     echo "
-    <h1 class='mb-4 text-white'>Suma de los Dígitos de los Años (SDA)</h1>
+    <h1 class='mb-4 amarillo'>Suma de los Dígitos de los Años (SDA)</h1>
     <form action='' method='post' class='p-4 rounded shadow bg-light' style='max-width: 400px;'>
         <div class='mb-3'>
             <label for='B' class='form-label'>Costo base</label>

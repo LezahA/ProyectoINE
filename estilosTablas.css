@@ -132,3 +132,7 @@ input.form-control:focus, select.form-control:focus {
     margin-top: auto;
 
 }
+
+.amarillo {
+    color:#c4a371; 
+}

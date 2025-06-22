@@ -19,7 +19,7 @@
         <!-- Formulario para capturar variables iniciales B,N y VR -->
         <?php
         echo "
-        <h1 class='mb-4 text-white'>Línea Recta</h1>
+        <h1 class='mb-4 amarillo' >Línea Recta</h1>
         <form action='' method='post' class='p-4 rounded shadow bg-light' style='max-width: 400px;'>
             <div class='mb-3'>
             <label for='B' class='form-label'>Costo base</label>
@@ -58,7 +58,7 @@
                 </div>
                 <br>";
                 
-                // Botón para exportar - DENTRO del if
+                // Botón para exportar
                 echo '<form id="exportarPDF" action="../../exportar_pdf.php" method="post" target="_blank">
                     <input type="hidden" name="tabla_html" id="tabla_html">
                     <button type="button" class="btn btn-danger" onclick="enviarTabla()">Exportar tabla a PDF</button>
