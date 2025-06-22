@@ -108,6 +108,7 @@
             document.getElementById('exportarPDF').submit();
         }
     </script>
+    <!-- Pie de pagina -->
   <?php include '../../estructura/footer.php'; ?>
 
   </body>

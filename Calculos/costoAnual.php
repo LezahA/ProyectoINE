@@ -111,7 +111,7 @@
       </div>
     </div>
 
-    <!-- Incluye Bootstrap Icons para los íconos en los botones -->
+    <!-- Bootstrap Icons para los íconos en los botones -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
   <?php include '../estructura/footer.php'; ?>

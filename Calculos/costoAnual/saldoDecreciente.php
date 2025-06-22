@@ -55,13 +55,13 @@
             $VR = floatval(trim($_POST['VR']));
             $N = intval(trim($_POST['N']));
             $metodo = $_POST['metodo'];
-
+            // Validaciones
             if (!empty($B) && !empty($VR) && !empty($N) && !empty($metodo)) {
                 $B = $B;
                 $VR = $VR;
                 $N = $N;
                 $metodo = $metodo;
-
+                // Bifurcaciones
                 if ($metodo == 'doble_dec') {
                     $r = 2 / $N;
                 } else {

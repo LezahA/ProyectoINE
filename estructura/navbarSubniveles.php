@@ -1,3 +1,4 @@
+<!-- Navegación en paginas de subniveles -->
 <nav class="navbar navbar-expand-md" style="background-color: #c4a371; border-bottom: 1px solid #ccc;">
     <div class="container-fluid">
     <a class="navbar-brand" href="../../index.php">

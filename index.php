@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   </head>
   <body>   
+    <!-- Cabecera y barra de navegacion -->
     <?php include './estructura/cabecera.php'; ?>
-
+    <!-- Nav con opcion de inicio y redireccion a pagina costo anual -->
     <nav class="navbar navbar-expand-md" style="background-color: #c4a371; border-bottom: 1px solid #ccc;">
       <div class="container-fluid">
         <a class="navbar-brand" href="./index.php">
@@ -34,7 +35,7 @@
         </div>
       </div>
     </nav>
-
+    <!-- Video de fondo -->
     <div class="video-container">
         <video autoplay loop muted playsinline id="video-fondo">
             <source src="./recursos/video1.mp4" type="video/mp4">
@@ -45,6 +46,7 @@
     </video>
     <div class="main-content container-fluid">
     </div>
+    <!-- Importar el footer -->
   <?php include './estructura/footer.php'; ?>
 
   </body>
