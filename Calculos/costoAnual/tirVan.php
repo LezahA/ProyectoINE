@@ -133,15 +133,11 @@
       // TIR sobre todos los flujos (0 a N)
       $tir = calcularTIR($flujos);
 
-      // Comprobación: VAN con TIR
-      $comprobacion = calcularVAN(array_slice($flujos, 1), $tir / 100) + $flujos[0];
-
       // Mostrar resultados
       echo "<div class='alert alert-info mt-4'>
               <h4>Resultados</h4>
-              <p><strong>VAN (VNA + año 0):</strong> $" . number_format($van, 2) . "</p>
+              <p><strong>VAN (VNA - Inversión):</strong> $" . number_format($van, 2) . "</p>
               <p><strong>TIR estimada:</strong> " . number_format($tir, 2) . "%</p>
-              <p><strong>Comprobación VAN con TIR:</strong> $" . number_format($comprobacion, 2) . "</p>
           </div>";
   }
   ?>
