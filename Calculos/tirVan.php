@@ -52,7 +52,8 @@
 
     <?php
     $mostrarCampos = false;
-    if (isset($_POST['inversion'], $_POST['anios'], $_POST['tasa'])) {
+
+    if (isset($_POST['solicitar']) || isset($_POST['calcular'])) {
         $mostrarCampos = true;
     }
 
@@ -72,15 +73,15 @@
                 <input type='number' class='form-control' name='egreso_$i' value='$egr' required>
             </div>";
         }
-        echo "</div><br><button type='submit' class='btn btn-success btn-block'>Calcular</button>";
+        echo "</div><br><button type='submit' name='calcular' class='btn btn-success btn-block'>Calcular</button>";
     } else {
-        echo "<button type='submit' class='btn btn-warning btn-block'>Solicitar flujos</button>";
+        echo "<button type='submit' name='solicitar' class='btn btn-warning btn-block'>Solicitar flujos</button>";
     }
     ?>
   </form>
 
   <?php
-  if ($mostrarCampos) {
+  if (isset($_POST['calcular'])) {
       $inversion = floatval($_POST['inversion']);
       $tasa_min = floatval($_POST['tasa']) / 100;
       $anios = intval($_POST['anios']);
@@ -91,29 +92,33 @@
       $flujos[] = -$inversion;
 
       for ($i = 1; $i <= $anios; $i++) {
-          $ing = floatval($_POST["ingreso_$i"]);
-          $egr = floatval($_POST["egreso_$i"]);
+          $ing = isset($_POST["ingreso_$i"]) ? floatval($_POST["ingreso_$i"]) : 0;
+          $egr = isset($_POST["egreso_$i"]) ? floatval($_POST["egreso_$i"]) : 0;
           $neto = $ing - $egr;
           $flujos[] = $neto;
           echo "<li><strong>Año $i:</strong> Ingreso = $" . number_format($ing, 2) . ", Egreso = $" . number_format($egr, 2) . ", Neto = $" . number_format($neto, 2) . "</li>";
       }
       echo "</ul>";
 
-      // Calcular VAN
+      // Calcular VAN - Descuento desde año 1 (exponente 1)
       function calcularVAN($flujos, $tasa) {
           $van = 0;
-          foreach ($flujos as $n => $f) {
-              $van += $f / pow(1 + $tasa, $n);
+          foreach ($flujos as $indice => $flujo) {
+              $periodo = $indice + 1; // Año 1 => exponente 1
+              $van += $flujo / pow(1 + $tasa, $periodo);
           }
           return $van;
       }
 
-      // Calcular TIR 
+      // Calcular TIR - usando la función calcularVAN normal (aquí no hay cambio)
       function calcularTIR($flujos) {
           $mejorTasa = null;
           $mejorVAN = INF;
           for ($t = -0.99; $t <= 1; $t += 0.0001) {
-              $van = calcularVAN($flujos, $t);
+              $van = 0;
+              foreach ($flujos as $n => $f) {
+                  $van += $f / pow(1 + $t, $n);
+              }
               if (abs($van) < abs($mejorVAN)) {
                   $mejorVAN = $van;
                   $mejorTasa = $t;
@@ -122,13 +127,19 @@
           return $mejorTasa * 100;
       }
 
+      // VAN: VNA años 1 a N + año 0
       $van = calcularVAN(array_slice($flujos, 1), $tasa_min) + $flujos[0];
-      $tir = calcularTIR($flujos);
-      $comprobacion = calcularVAN($flujos, $tir / 100);
 
+      // TIR sobre todos los flujos (0 a N)
+      $tir = calcularTIR($flujos);
+
+      // Comprobación: VAN con TIR
+      $comprobacion = calcularVAN(array_slice($flujos, 1), $tir / 100) + $flujos[0];
+
+      // Mostrar resultados
       echo "<div class='alert alert-info mt-4'>
               <h4>Resultados</h4>
-              <p><strong>VAN:</strong> $" . number_format($van, 2) . "</p>
+              <p><strong>VAN (VNA + año 0):</strong> $" . number_format($van, 2) . "</p>
               <p><strong>TIR estimada:</strong> " . number_format($tir, 2) . "%</p>
               <p><strong>Comprobación VAN con TIR:</strong> $" . number_format($comprobacion, 2) . "</p>
           </div>";
