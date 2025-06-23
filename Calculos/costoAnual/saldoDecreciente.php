@@ -70,6 +70,7 @@
                 ?>
 
                 <!-- Botón para exportar -->
+                <br><br>
                 <form id="exportarPDF" action="../../exportar_pdf.php" method="post" target="_blank">
                     <input type="hidden" name="tabla_html" id="tabla_html">
                     <button type="button" class="btn btn-danger" onclick="enviarTabla()">Exportar tabla a PDF</button>
