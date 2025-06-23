@@ -44,18 +44,15 @@
     <div class="main-content container-fluid py-5">
       <div class="main-card">
         <div class="text-center mb-4">
-          <h1 class="display-5 fw-bold mb-3">Depreciación</h1>
-          <p class="lead mb-4">Elija el método para calcular la depreciación</p>
+          <h1 class="display-5 fw-bold mb-3">TIR y VAN</h1>
+          <p class="lead mb-4">Elija una opción</p>
         </div>
         <div class="d-flex flex-column align-items-center">
-          <a href="./costoAnual/lineaRecta.php" class="btn btn-primary rounded-pill shadow-sm modern-btn mb-3">
-            <i class="fas fa-slash"></i> Línea Recta (LR)
+          <a href="./tir/tirVan.php" class="btn btn-success rounded-pill shadow-sm modern-btn mb-3">
+            <i class="fas fa-calculator"></i> Tasa de Rendimiento (TIR y VAN)
           </a>
-          <a href="./costoAnual/saldoDecreciente.php" class="btn btn-secondary rounded-pill shadow-sm modern-btn mb-3">
-            <i class="fas fa-arrow-down"></i> Saldo Decreciente (SD)
-          </a>
-          <a href="./costoAnual/sda.php" class="btn btn-success rounded-pill shadow-sm modern-btn mb-3">
-            <i class="fas fa-calculator"></i> Suma de los Dígitos de los Años (SDA)
+          <a href="./tir/compararTir.php" class="btn btn-warning rounded-pill shadow-sm modern-btn">
+            <i class="fas fa-percent"></i> Comparación (TIR y VAN)
           </a>
         </div>
       </div>

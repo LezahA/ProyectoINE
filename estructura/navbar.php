@@ -12,6 +12,10 @@
         <li class="nav-item">
             <a class="nav-link" href="../Calculos/costoAnual.php" style="color: #fff; font-size: 1.2rem;">Costo anual</a>
         </li>
+        &nbsp&nbsp&nbsp&nbsp
+        <li class="nav-item">
+            <a class="nav-link" href="../Calculos/tir.php" style="color: #fff; font-size: 1.2rem;">TIR y VAN</a>
+        </li>
         </ul>
     </div>
     </div>
