@@ -55,9 +55,15 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Tasa mínima aceptable de retorno (%)</label>
-          <input type="number" name="tasa" class="form-control" required step="0.01" value="<?= $_POST['tasa'] ?? '' ?>">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Tasa mínima aceptable de retorno - Proyecto A (%)</label>
+            <input type="number" name="tasa_a" class="form-control" required step="0.01" value="<?= $_POST['tasa_a'] ?? '' ?>">
+          </div>
+          <div class="form-group col-md-6">
+            <label>Tasa mínima aceptable de retorno - Proyecto B (%)</label>
+            <input type="number" name="tasa_b" class="form-control" required step="0.01" value="<?= $_POST['tasa_b'] ?? '' ?>">
+          </div>
         </div>
 
         <?php
@@ -126,7 +132,9 @@
         $invA = floatval($_POST['inv_a']);
         $invB = floatval($_POST['inv_b']);
         $anios = intval($_POST['anios']);
-        $tasa = floatval($_POST['tasa']) / 100;
+
+        $tasaA = floatval($_POST['tasa_a']) / 100;
+        $tasaB = floatval($_POST['tasa_b']) / 100;
 
         $flujosA = [-$invA];
         $flujosB = [-$invB];
@@ -163,14 +171,15 @@
         echo "</tbody></table></div>";
 
 
-        $vanA = calcularVAN(array_slice($flujosA, 1), $tasa) + $flujosA[0];
-        $vanB = calcularVAN(array_slice($flujosB, 1), $tasa) + $flujosB[0];
+        $vanA = calcularVAN(array_slice($flujosA, 1), $tasaA) + $flujosA[0];
+        $vanB = calcularVAN(array_slice($flujosB, 1), $tasaB) + $flujosB[0];
         $tirA = calcularTIR($flujosA);
         $tirB = calcularTIR($flujosB);
 
         echo "<div class='alert alert-info mt-4'><h4>Resultados</h4>
-              <p><strong>Proyecto A - VAN:</strong> $" . number_format($vanA, 2) . " | <strong>TIR:</strong> " . number_format($tirA, 2) . "%</p>
-              <p><strong>Proyecto B - VAN:</strong> $" . number_format($vanB, 2) . " | <strong>TIR:</strong> " . number_format($tirB, 2) . "%</p>";
+        <p><strong>Proyecto A - VAN (" . number_format($tasaA * 100, 2) . "%):</strong> $" . number_format($vanA, 2) . " | <strong>TIR:</strong> " . number_format($tirA, 2) . "%</p>
+        <p><strong>Proyecto B - VAN (" . number_format($tasaB * 100, 2) . "%):</strong> $" . number_format($vanB, 2) . " | <strong>TIR:</strong> " . number_format($tirB, 2) . "%</p>";
+
 
         if ($tirA > $tirB) {
           echo "<hr><p><strong>Conclusión:</strong> El <strong>Proyecto A</strong> ofrece un mejor retorno (TIR).</p>";
