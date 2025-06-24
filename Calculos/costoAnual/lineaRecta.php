@@ -54,7 +54,7 @@
                 echo "
                 <div class='alert alert-success mt-4' role='alert'>
                     <h4 class='alert-heading'>Resultado</h4>
-                    <p>El costo anual es: <strong>" . number_format($depreciacion, 2) . "</strong></p>
+                    <p>La depreciación es: <strong>" . number_format($depreciacion, 2) . "</strong></p>
                 </div>
                 <br>";
                 
