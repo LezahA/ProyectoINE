@@ -30,7 +30,7 @@
         <?php include '../../estructura/cabecera.php'; ?>
         <?php include '../../estructura/navbarSubniveles.php'; ?>
 
-        <div class="main-content container py-5">
+        <div class="main-content container py-5" id="tirPDF">
           <h2 class="display-5 text-center mb-4 amarillo">Calculadora TIR y VAN</h2>
 
           <div class="main-card">
@@ -132,6 +132,13 @@
           // TIR sobre todos los flujos (0 a N)
           $tir = calcularTIR($flujos);
 
+            // Botón para exportar
+            echo '<br><form id="exportarPDF" action="../../exportar_pdf.php" method="post" target="_blank">
+                <input type="hidden" name="tabla_html" id="tabla_html">
+                <button type="button" class="btn btn-danger" onclick="enviarTabla()">Exportar a PDF</button>
+            </form>
+            <br>';
+
           // Mostrar resultados
           echo "<div class='alert alert-info mt-4'>
                   <h4>Resultados</h4>
@@ -142,6 +149,13 @@
       ?>
       </div>
     </div>
+    <script>
+      function enviarTabla() {
+        // Captura el HTML de la tabla y lo envía al formulario
+        document.getElementById('tabla_html').value = document.getElementById('tirPDF').innerHTML;
+        document.getElementById('exportarPDF').submit();
+      }
+  </script>
 <?php include '../../estructura/footer.php'; ?>
 </body>
 </html>
