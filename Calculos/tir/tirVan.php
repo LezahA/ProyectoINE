@@ -137,8 +137,7 @@
                 <input type="hidden" name="tabla_html" id="tabla_html">
                 <button type="button" class="btn btn-danger" onclick="enviarTabla()">Exportar a PDF</button>
             </form>
-            <br>
-            <div >';
+            <br>';
 
           // Mostrar resultados
           echo "<div class='alert alert-info mt-4'>
