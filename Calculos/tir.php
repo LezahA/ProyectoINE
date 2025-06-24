@@ -31,6 +31,9 @@
         font-size: 1rem; padding: 0.75rem 1rem; width: 80%;
         max-width: 95%; min-width: 220px;
         text-align: center;
+        white-space: normal !important;
+        word-wrap: break-word;
+        text-align: center;
       }
       .modern-btn:hover, .modern-btn:focus {
         transform: translateY(-3px) scale(1.04);
