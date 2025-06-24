@@ -99,27 +99,44 @@
       </form>
 
       <?php
-      // Calcular VAN - Descuento desde año 1 (exponente 1)
+
+      /**
+       * Calcula el Valor Actual Neto (VAN) de un conjunto de flujos.
+       * 
+       * @param array $flujos Arreglo de flujos de efectivo (sin incluir la inversión inicial).
+       * @param float $tasa Tasa de descuento (en decimal, ej. 0.1 para 10%, 0.2 para 20%, etc.).
+       * @return float Retorna el VAN calculado.
+       */
       function calcularVAN($flujos, $tasa)
       {
         $van = 0;
         foreach ($flujos as $indice => $flujo) {
-          $periodo = $indice + 1; // Año 1 => exponente 1
+          // Año 1 => exponente 1
+          $periodo = $indice + 1;
           $van += $flujo / pow(1 + $tasa, $periodo);
         }
         return $van;
       }
 
-      // Calcular TIR - usando la función calcularVAN normal (aquí no hay cambio)
+      /**
+       * Calcula la Tasa Interna de Retorno (TIR) usando búsqueda iterativa.
+       * 
+       * @param array $flujos Arreglo de flujos de efectivo, incluyendo la inversión inicial negativa.
+       * @return float TIR estimada en porcentaje.
+       */
       function calcularTIR($flujos)
       {
         $mejorTasa = null;
         $mejorVAN = INF;
+
+        // Búsqueda de tasa desde -99% a 100% en incrementos de 0.01%
         for ($t = -0.99; $t <= 1; $t += 0.0001) {
           $van = 0;
           foreach ($flujos as $n => $f) {
             $van += $f / pow(1 + $t, $n);
           }
+
+          // Selecciona la tasa cuyo VAN sea más cercano a cero
           if (abs($van) < abs($mejorVAN)) {
             $mejorVAN = $van;
             $mejorTasa = $t;
@@ -128,17 +145,27 @@
         return $mejorTasa * 100;
       }
 
+      // Verifica si se ha enviado el formulario con el botón "calcular"
       if (isset($_POST['calcular'])) {
+        // Captura y convierte los datos del formulario
+
+        // Inversión inicial proyecto A
         $invA = floatval($_POST['inv_a']);
+        // Inversión inicial proyecto B
         $invB = floatval($_POST['inv_b']);
+        // Número de años del proyecto
         $anios = intval($_POST['anios']);
 
+        // Tasa de descuento A en decimal
         $tasaA = floatval($_POST['tasa_a']) / 100;
+        // Tasa de descuento B en decimal
         $tasaB = floatval($_POST['tasa_b']) / 100;
 
+        // Inicializa los arreglos de flujos con la inversión inicial negativa
         $flujosA = [-$invA];
         $flujosB = [-$invB];
 
+        // Muestra la tabla de resumen
         echo "<hr><h5 class='mb-3'>Resumen de flujos netos</h5>";
         echo "<div class='table-responsive'>";
         echo "<table class='table table-bordered table-dark text-center'>
@@ -150,7 +177,10 @@
           </tr>
         </thead>
         <tbody>";
+
+         // Recorre los años para calcular ingresos netos y llenar los flujos
         for ($i = 1; $i <= $anios; $i++) {
+          // Captura ingresos y egresos de cada proyecto
           $ingA = floatval($_POST["ingresoA_$i"]);
           $egrA = floatval($_POST["egresoA_$i"]);
           $netA = $ingA - $egrA;
@@ -158,10 +188,12 @@
           $ingB = floatval($_POST["ingresoB_$i"]);
           $egrB = floatval($_POST["egresoB_$i"]);
           $netB = $ingB - $egrB;
-
+          
+          // Añade los flujos netos al arreglo de cada proyecto
           $flujosA[] = $netA;
           $flujosB[] = $netB;
 
+          // Muestra la fila en la tabla
           echo "<tr>
           <td>$i</td>
           <td>$" . number_format($netA, 2) . "</td>
@@ -170,17 +202,20 @@
         }
         echo "</tbody></table></div>";
 
-
+        // Calcula VAN para ambos proyectos (se omite el flujo 0 en descuento y se suma al final)
         $vanA = calcularVAN(array_slice($flujosA, 1), $tasaA) + $flujosA[0];
         $vanB = calcularVAN(array_slice($flujosB, 1), $tasaB) + $flujosB[0];
+
+        // Calcula la TIR de ambos proyectos
         $tirA = calcularTIR($flujosA);
         $tirB = calcularTIR($flujosB);
 
+        // Muestra resultados
         echo "<div class='alert alert-info mt-4'><h4>Resultados</h4>
         <p><strong>Proyecto A - VAN (" . number_format($tasaA * 100, 2) . "%):</strong> $" . number_format($vanA, 2) . " | <strong>TIR:</strong> " . number_format($tirA, 2) . "%</p>
         <p><strong>Proyecto B - VAN (" . number_format($tasaB * 100, 2) . "%):</strong> $" . number_format($vanB, 2) . " | <strong>TIR:</strong> " . number_format($tirB, 2) . "%</p>";
 
-
+        // Conclusión basada en la TIR
         if ($tirA > $tirB) {
           echo "<hr><p><strong>Conclusión:</strong> El <strong>Proyecto A</strong> ofrece un mejor retorno (TIR).</p>";
         } elseif ($tirB > $tirA) {
