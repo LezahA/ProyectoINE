@@ -9,13 +9,13 @@
     &nbsp&nbsp&nbsp
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="../Calculos/costoAnual.php" style="color: #fff; font-size: 1.2rem;">Depreciación</a>
-        </li>
-        &nbsp&nbsp&nbsp&nbsp
-        <li class="nav-item">
-            <a class="nav-link" href="../Calculos/tir.php" style="color: #fff; font-size: 1.2rem;">TIR y VAN</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Calculos/tir.php" style="color: #fff; font-size: 1.2rem;">TIR y VAN</a>
+            </li>
+            &nbsp&nbsp&nbsp&nbsp
+            <li class="nav-item">
+                <a class="nav-link" href="../Calculos/costoAnual.php" style="color: #fff; font-size: 1.2rem;">Depreciación</a>
+            </li>
         </ul>
     </div>
     </div>
