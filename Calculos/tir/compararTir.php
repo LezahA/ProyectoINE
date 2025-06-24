@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="utf-8">
-  <title>Comparador de Proyectos - TIR y VAN</title>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      color: #fff;
-    }
-
-    .main-card {
-      background: rgba(30, 41, 59, 0.97);
-      border-radius: 1.5rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
-      padding: 2rem;
-      max-width: 1100px;
-      margin: 40px auto;
-      border: 1.5px solid #334155;
-    }
-
-    label {
-      font-weight: 600;
-    }
-  </style>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title>Proyecto Ingenieria de Negocios</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../../estilosTablas.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
+    <style>
+          body {
+          background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+          color: #fff;
+        }
+        .main-card {
+          background: rgba(30, 41, 59, 0.97);
+          border-radius: 1.5rem;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+          padding: 2rem;
+          max-width: 800px;
+          margin: 40px auto;
+          border: 1.5px solid #334155;
+        }
+    </style>      
+  </head>
 
 <body>
+  <!-- Cabecera y barra de navegacion -->
   <?php include '../../estructura/cabecera.php'; ?>
   <?php include '../../estructura/navbarSubniveles.php'; ?>
 
-  <div class="main-content container py-5">
+  <div class="main-content container py-5" id='tirComparacion'>
     <h2 class="display-5 text-center mb-4 amarillo">Comparador de Proyectos - TIR y VAN</h2>
+
     <div class="main-card">
 
       <form method="POST">
@@ -225,11 +222,26 @@
         }
 
         echo "</div>";
+
+        // Botón para exportar
+        echo '
+        <form id="exportarPDF" action="../../exportar_pdf.php" method="post" target="_blank">
+          <input type="hidden" name="tabla_html" id="tabla_html">
+          <button type="button" class="btn btn-danger" onclick="enviarTabla()">Exportar tabla a PDF</button>
+        </form>
+        <br>';
       }
       ?>
     </div>
   </div>
-
+  <script>
+      function enviarTabla() {
+          // Captura el HTML de la tabla y lo envía al formulario
+          document.getElementById('tabla_html').value = document.getElementById('tirComparacion').innerHTML;
+          document.getElementById('exportarPDF').submit();
+      }
+  </script>
+  <!-- Pie de pagina -->
   <?php include '../../estructura/footer.php'; ?>
 </body>
 
