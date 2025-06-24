@@ -52,7 +52,7 @@
         <!-- Botón para exportar -->
         <form id="exportarPDF" action="../../exportar_pdf.php" method="post" target="_blank">
             <input type="hidden" name="tabla_html" id="tabla_html">
-            <button type="button" class="btn btn-danger" onclick="enviarTabla()">Exportar tabla a PDF</button>
+            <button type="button" class="btn btn-danger mt-3" onclick="enviarTabla()">Exportar tabla a PDF</button>
         </form>
         <br>
         <div id="tablaDepreciacion">
